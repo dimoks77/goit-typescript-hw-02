@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-const customStyles: ReactModal.Styles = {
+const customStyles: Modal.Styles = {
   content: {
     top: '50%',
     left: '50%',
