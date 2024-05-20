@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import { FormEvent } from 'react';
 import css from "./SearchBar.module.css";
 import { IoIosSearch } from "react-icons/io";
 import toast from "react-hot-toast";
