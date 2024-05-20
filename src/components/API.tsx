@@ -1,10 +1,17 @@
 import axios from 'axios';
 
-// Определяем типы для аргументов функции fetchData
+type Photo = {
+  id: string;
+  urls: {
+    regular: string;
+  };
+  alt_description: string;
+};
+
 type FetchDataArgs = {
   query: string;
   page: number;
-  setPhotos: React.Dispatch<React.SetStateAction<any[]>>;
+  setPhotos: React.Dispatch<React.SetStateAction<Photo[]>>; 
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setError: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -28,8 +35,12 @@ export async function fetchData({
       },
     });
     setPhotos((prevPhotos) => [...prevPhotos, ...response.data.results]);
-  } catch (error: any) {
-    setError(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      setError(error.message);
+    } else {
+      setError("An unknown error occurred");
+    }
   } finally {
     setLoading(false);
   }
