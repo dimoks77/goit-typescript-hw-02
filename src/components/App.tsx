@@ -58,17 +58,21 @@ const App: React.FC = () => {
       if (query === '') {
         return;
       }
-
+  
       setLoading(true);
       try {
         await fetchData({ query, page, setPhotos, setLoading, setError });
-      } catch (error: any) {
-        setError(error.message);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('An unknown error occurred');
+        }
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchDataAndHandleLoading();
   }, [query, page]);
 
