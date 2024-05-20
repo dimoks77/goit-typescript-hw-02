@@ -1,6 +1,7 @@
+import React from 'react';
 import Modal from 'react-modal';
 
-const customStyles = {
+const customStyles: ReactModal.Styles = {
   content: {
     top: '50%',
     left: '50%',
@@ -9,13 +10,24 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     cursor: 'zoom-out',
-    
   },
 };
 
 Modal.setAppElement('#root');
 
-const ImageModal = ({ isOpen, onRequestClose, selectedPhoto }) => {
+interface Photo {
+  urls: {
+    regular: string;
+  };
+}
+
+interface ImageModalProps {
+  isOpen: boolean;
+  onRequestClose: () => void;
+  selectedPhoto: Photo | null;
+}
+
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onRequestClose, selectedPhoto }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -24,7 +36,7 @@ const ImageModal = ({ isOpen, onRequestClose, selectedPhoto }) => {
       contentLabel="Image Modal"
     >
       {selectedPhoto && (
-        <img onClick={onRequestClose} src={selectedPhoto.urls.regular} />
+        <img onClick={onRequestClose} src={selectedPhoto.urls.regular} alt="Selected" />
       )}
     </Modal>
   );

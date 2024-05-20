@@ -1,7 +1,8 @@
+import React from 'react';
 import { ProgressBar } from "react-loader-spinner";
-import css from './Loader.module.css'
+import css from './Loader.module.css';
 
-export const Loader = () => {
+export const Loader: React.FC = () => {
   return (
     <ProgressBar
       visible={true}
